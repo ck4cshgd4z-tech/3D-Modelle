@@ -1,0 +1,9 @@
+numpy>=2.0
+scipy>=1.12
+opencv-contrib-python-headless>=4.9   # contrib: ximgproc (Fast-Global-Smoother)
+trimesh>=4.0
+fast-simplification>=0.1.7
+rtree>=1.2                            # Abweichungs- und Raycast-Pruefungen
+matplotlib>=3.8
+lxml>=5.0
+networkx>=3.0

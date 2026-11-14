@@ -1,0 +1,300 @@
+{
+  "version": "1.0.0",
+  "laenge_mm": 90.0,
+  "leder_mm": [
+    1.2,
+    1.6,
+    2.0
+  ],
+  "patch_mm": [
+    90.0,
+    41.21
+  ],
+  "relief_mm": [
+    -0.3,
+    2.433
+  ],
+  "parameter": {
+    "res": 0.08,
+    "plate_w": 126.0,
+    "plate_h": 78.0,
+    "corner_r": 4.0,
+    "blank_w": 100.0,
+    "blank_h": 52.0,
+    "patrize_base": 4.0,
+    "matrize_flange": 6.5,
+    "detail_beta": 0.5,
+    "detail_sigma": 0.6,
+    "min_gap_factor": 0.85,
+    "stop_factor": 0.85,
+    "pin_h": 6.5,
+    "pin_chamfer": 0.8,
+    "hole_clear": 0.25,
+    "hole_depth": 6.0,
+    "hole_chamfer": 0.6,
+    "collar_r": 5.5,
+    "label_depth": 0.4,
+    "pins": [
+      [
+        -57.0,
+        33.0,
+        8.0
+      ],
+      [
+        57.0,
+        33.0,
+        6.0
+      ],
+      [
+        57.0,
+        -33.0,
+        6.0
+      ],
+      [
+        -57.0,
+        -33.0,
+        6.0
+      ]
+    ]
+  },
+  "dateien": [
+    "Matrize_Negativ_90mm.stl",
+    "Matrize_Negativ_90mm.3mf",
+    "Patrize_Positiv_90mm_Leder-1.2mm.stl",
+    "Patrize_Positiv_90mm_Leder-1.2mm.3mf",
+    "Patrize_Positiv_90mm_Leder-1.6mm.stl",
+    "Patrize_Positiv_90mm_Leder-1.6mm.3mf",
+    "Patrize_Positiv_90mm_Leder-2.0mm.stl",
+    "Patrize_Positiv_90mm_Leder-2.0mm.3mf"
+  ],
+  "pruefungen": [
+    {
+      "name": "Netz Matrize_Negativ_90mm: wasserdicht/mannigfaltig",
+      "ok": true,
+      "detail": {
+        "faces": 449998,
+        "watertight": true,
+        "winding_consistent": true,
+        "volume_ok": true,
+        "volume_cm3": 60.02,
+        "bounds": [
+          [
+            -63.0,
+            -39.0,
+            0.0
+          ],
+          [
+            63.0,
+            39.0,
+            6.801
+          ]
+        ]
+      }
+    },
+    {
+      "name": "Netz Patrize_Positiv_90mm_Leder-1.2mm: wasserdicht/mannigfaltig",
+      "ok": true,
+      "detail": {
+        "faces": 449998,
+        "watertight": true,
+        "winding_consistent": true,
+        "volume_ok": true,
+        "volume_cm3": 42.86,
+        "bounds": [
+          [
+            -63.0,
+            -39.0,
+            0.0
+          ],
+          [
+            63.0,
+            39.0,
+            10.5
+          ]
+        ]
+      }
+    },
+    {
+      "name": "Netz Patrize_Positiv_90mm_Leder-1.6mm: wasserdicht/mannigfaltig",
+      "ok": true,
+      "detail": {
+        "faces": 449998,
+        "watertight": true,
+        "winding_consistent": true,
+        "volume_ok": true,
+        "volume_cm3": 42.87,
+        "bounds": [
+          [
+            -63.0,
+            -39.0,
+            0.0
+          ],
+          [
+            63.0,
+            39.0,
+            10.5
+          ]
+        ]
+      }
+    },
+    {
+      "name": "Netz Patrize_Positiv_90mm_Leder-2.0mm: wasserdicht/mannigfaltig",
+      "ok": true,
+      "detail": {
+        "faces": 449998,
+        "watertight": true,
+        "winding_consistent": true,
+        "volume_ok": true,
+        "volume_cm3": 42.88,
+        "bounds": [
+          [
+            -63.0,
+            -39.0,
+            0.0
+          ],
+          [
+            63.0,
+            39.0,
+            10.5
+          ]
+        ]
+      }
+    },
+    {
+      "name": "Spalt Leder 1,2 mm >= 0.85*g",
+      "ok": true,
+      "detail": {
+        "min_vertikal_mm": 1.141,
+        "median_mm": 1.226,
+        "max_verdichtung_an_rillen": "40 %"
+      }
+    },
+    {
+      "name": "Spalt Leder 1,6 mm >= 0.85*g",
+      "ok": true,
+      "detail": {
+        "min_vertikal_mm": 1.556,
+        "median_mm": 1.64,
+        "max_verdichtung_an_rillen": "34 %"
+      }
+    },
+    {
+      "name": "Spalt Leder 2,0 mm >= 0.85*g",
+      "ok": true,
+      "detail": {
+        "min_vertikal_mm": 1.959,
+        "median_mm": 2.055,
+        "max_verdichtung_an_rillen": "30 %"
+      }
+    },
+    {
+      "name": "Stift (-57,+33) Ø8: Bohrung vorhanden, ausserhalb Zuschnitt",
+      "ok": true,
+      "detail": {
+        "bohrung": true,
+        "frei": true
+      }
+    },
+    {
+      "name": "Stift (+57,+33) Ø6: Bohrung vorhanden, ausserhalb Zuschnitt",
+      "ok": true,
+      "detail": {
+        "bohrung": true,
+        "frei": true
+      }
+    },
+    {
+      "name": "Stift (+57,-33) Ø6: Bohrung vorhanden, ausserhalb Zuschnitt",
+      "ok": true,
+      "detail": {
+        "bohrung": true,
+        "frei": true
+      }
+    },
+    {
+      "name": "Stift (-57,-33) Ø6: Bohrung vorhanden, ausserhalb Zuschnitt",
+      "ok": true,
+      "detail": {
+        "bohrung": true,
+        "frei": true
+      }
+    },
+    {
+      "name": "Stifteintauchtiefe Leder 1,2 mm < Sacklochtiefe",
+      "ok": true,
+      "detail": {
+        "eintauchen_mm": 5.48,
+        "sackloch_mm": 6.0
+      }
+    },
+    {
+      "name": "Stifteintauchtiefe Leder 1,6 mm < Sacklochtiefe",
+      "ok": true,
+      "detail": {
+        "eintauchen_mm": 5.14,
+        "sackloch_mm": 6.0
+      }
+    },
+    {
+      "name": "Stifteintauchtiefe Leder 2,0 mm < Sacklochtiefe",
+      "ok": true,
+      "detail": {
+        "eintauchen_mm": 4.8,
+        "sackloch_mm": 6.0
+      }
+    },
+    {
+      "name": "Patch passt in Lederzuschnitt",
+      "ok": true,
+      "detail": {
+        "patch_mm": [
+          90.0,
+          41.2
+        ],
+        "zuschnitt_mm": [
+          100.0,
+          52.0
+        ]
+      }
+    },
+    {
+      "name": "Matrize Mindest-Bodenstaerke >= 3 mm",
+      "ok": true,
+      "detail": {
+        "boden_mm": 4.07
+      }
+    },
+    {
+      "name": "Reduktionsfehler Matrize_Negativ_90mm (p99.9 < 0.03 mm)",
+      "ok": true,
+      "detail": {
+        "p99_9_mm": 0.0041,
+        "max_mm": 0.0082
+      }
+    },
+    {
+      "name": "Reduktionsfehler Patrize_Positiv_90mm_Leder-1.2mm (p99.9 < 0.03 mm)",
+      "ok": true,
+      "detail": {
+        "p99_9_mm": 0.0042,
+        "max_mm": 0.0075
+      }
+    },
+    {
+      "name": "Reduktionsfehler Patrize_Positiv_90mm_Leder-1.6mm (p99.9 < 0.03 mm)",
+      "ok": true,
+      "detail": {
+        "p99_9_mm": 0.0039,
+        "max_mm": 0.007
+      }
+    },
+    {
+      "name": "Reduktionsfehler Patrize_Positiv_90mm_Leder-2.0mm (p99.9 < 0.03 mm)",
+      "ok": true,
+      "detail": {
+        "p99_9_mm": 0.004,
+        "max_mm": 0.0083
+      }
+    }
+  ]
+}

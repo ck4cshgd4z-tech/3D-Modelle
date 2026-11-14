@@ -1,0 +1,5 @@
+# Grosse, jederzeit reproduzierbare Netzdateien (werden per Generator oder ZIP uebergeben)
+*.stl
+__pycache__/
+*.pyc
+.DS_Store
