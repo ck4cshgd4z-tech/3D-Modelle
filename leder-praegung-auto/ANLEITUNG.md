@@ -19,6 +19,10 @@ Schnittkante für den Zuschnitt.
 
 Du brauchst **eine Matrize + die eine Patrize, die zu deiner Lederstärke passt**.
 
+Dass die Patrize weicher und weniger detailliert aussieht als die Matrize, ist Absicht. Sie
+drückt das Leder nur von hinten in die Form. Die feinen Details (Fugen, Scheinwerfer, Lamellen,
+Nahtrille) prägt die Matrize auf der Sichtseite.
+
 Maße: Patch 90 × 41 mm (wie auf dem Foto, geschätzt über das Größenverhältnis zum
 Anhänger-Schild), Platten 126 × 78 mm, Lederzuschnitt **100 × 52 mm**.
 Reliefhöhe bis 2,4 mm, Fugen und Rillen 0,2–0,3 mm tief und mindestens ca. 0,45 mm breit.

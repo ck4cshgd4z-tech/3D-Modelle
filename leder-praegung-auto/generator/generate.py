@@ -22,7 +22,7 @@ import mesh  # noqa: E402
 import relief  # noqa: E402
 import shapes  # noqa: E402
 
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 
 
 def log(msg, t0=[time.time()]):
@@ -161,24 +161,26 @@ def save_svg(out, outer_px, info, p):
     (out / "schnittschablone_1zu1.svg").write_text(svg, encoding="utf-8")
 
 
-def run_checks(F, Fb, gr, outer, Zm, Zps, rels, X, Y, p, meshes):
+def run_checks(F, closeds, outer, Zm, Zps, rels, X, Y, p, meshes):
     """Automatische Pruefungen; liefert Liste (Name, ok, Detail)."""
     res = []
     for name, m in meshes.items():
         rep = mesh.mesh_report(m)
         ok = rep["watertight"] and rep["winding_consistent"] and rep["volume_ok"]
         res.append((f"Netz {name}: wasserdicht/mannigfaltig", ok, rep))
-    # Lederspalt in Pressstellung: vertikaler Spalt >= Normalenabstand >= min_gap_factor*g
-    # (Formflaeche ohne Rillen; die Rillen verdichten das Leder gezielt, Wert wird mitberichtet)
+    # Lederspalt in Pressstellung: vertikaler Spalt zur (geschlossenen) Formflaeche
+    # >= Normalenabstand >= min_gap_factor*g. Schmale Rillen verdichten das Leder gezielt;
+    # die staerkste Verdichtung (inkl. Anschlag) wird geprueft (<= 50 %, wie beim Punzieren).
     inside = outer | (np.abs(F) > 1e-4)
     for g, rel in rels.items():
-        gap = (g + Fb) - rel
+        gap = (g + closeds[g]) - rel
         gmin = float(gap[inside].min())
         stop = p.stop_factor * g
         squeeze = 1 - float(((stop + F) - rel)[inside].min()) / g
         res.append((f"Spalt Leder {fmt_mm(g)} mm >= {p.min_gap_factor:.2f}*g", gmin >= p.min_gap_factor * g - 1e-3,
-                    dict(min_vertikal_mm=round(gmin, 3), median_mm=round(float(np.median(gap[inside])), 3),
-                         max_verdichtung_an_rillen=f"{squeeze * 100:.0f} %")))
+                    dict(min_vertikal_mm=round(gmin, 3), median_mm=round(float(np.median(gap[inside])), 3))))
+        res.append((f"Verdichtung an Rillen Leder {fmt_mm(g)} mm <= 50 %", squeeze <= 0.50,
+                    dict(max_verdichtung=f"{squeeze * 100:.0f} %")))
     # Stifte vs. Bohrungen (Matrize gewendet) und Lederzuschnitt
     for (cx, cy, d) in p.pins:
         i = int(np.argmin(np.abs(Y[:, 0] - cy)))
@@ -261,10 +263,10 @@ def main():
 
     log("Matrize (Negativ) aufbauen")
     Zm = dies.build_matrize(F, X, Y, p, "MATRIZE - NEGATIV")
-    Zps, rels = {}, {}
+    Zps, rels, closeds = {}, {}, {}
     for lg in a.leder:
         log(f"Patrize (Positiv) fuer Leder {lg} mm aufbauen (Kugel-Versatz)")
-        Zps[lg], rels[lg] = dies.build_patrize(Fb, lg, X, Y, p, f"PATRIZE - LEDER {lg:.1f} MM")
+        Zps[lg], rels[lg], closeds[lg] = dies.build_patrize(Fb, lg, X, Y, p, f"PATRIZE - LEDER {lg:.1f} MM")
 
     meshes, files = {}, []
     stem_m = f"Matrize_Negativ_{a.laenge:.0f}mm"
@@ -283,7 +285,7 @@ def main():
     log("Vorschauen, Schablone, Pruefbericht")
     save_previews(out, F, outer, Zm, Zps, X, Y, p, img, F_px, info)
     save_svg(out, outer_px, info, p)
-    checks = run_checks(F, Fb, gr, outer, Zm, Zps, rels, X, Y, p, meshes)
+    checks = run_checks(F, closeds, outer, Zm, Zps, rels, X, Y, p, meshes)
     for name, (e999, emax) in errors.items():
         if e999 is not None:
             checks.append((f"Reduktionsfehler {name} (p99.9 < 0.03 mm)", e999 < 0.03,

@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "laenge_mm": 90.0,
   "leder_mm": [
     1.2,
@@ -24,7 +24,10 @@
     "patrize_base": 4.0,
     "matrize_flange": 6.5,
     "detail_beta": 0.5,
-    "detail_sigma": 0.6,
+    "detail_sigma": 0.25,
+    "close_factor": 0.6,
+    "fill_max": 0.1,
+    "smooth_sigma": 0.25,
     "min_gap_factor": 0.85,
     "stop_factor": 0.85,
     "pin_h": 6.5,
@@ -95,11 +98,11 @@
       "name": "Netz Patrize_Positiv_90mm_Leder-1.2mm: wasserdicht/mannigfaltig",
       "ok": true,
       "detail": {
-        "faces": 449998,
+        "faces": 449996,
         "watertight": true,
         "winding_consistent": true,
         "volume_ok": true,
-        "volume_cm3": 42.86,
+        "volume_cm3": 43.03,
         "bounds": [
           [
             -63.0,
@@ -122,7 +125,7 @@
         "watertight": true,
         "winding_consistent": true,
         "volume_ok": true,
-        "volume_cm3": 42.87,
+        "volume_cm3": 43.06,
         "bounds": [
           [
             -63.0,
@@ -145,7 +148,7 @@
         "watertight": true,
         "winding_consistent": true,
         "volume_ok": true,
-        "volume_cm3": 42.88,
+        "volume_cm3": 43.1,
         "bounds": [
           [
             -63.0,
@@ -164,27 +167,45 @@
       "name": "Spalt Leder 1,2 mm >= 0.85*g",
       "ok": true,
       "detail": {
-        "min_vertikal_mm": 1.141,
-        "median_mm": 1.226,
-        "max_verdichtung_an_rillen": "40 %"
+        "min_vertikal_mm": 1.121,
+        "median_mm": 1.201
+      }
+    },
+    {
+      "name": "Verdichtung an Rillen Leder 1,2 mm <= 50 %",
+      "ok": true,
+      "detail": {
+        "max_verdichtung": "46 %"
       }
     },
     {
       "name": "Spalt Leder 1,6 mm >= 0.85*g",
       "ok": true,
       "detail": {
-        "min_vertikal_mm": 1.556,
-        "median_mm": 1.64,
-        "max_verdichtung_an_rillen": "34 %"
+        "min_vertikal_mm": 1.533,
+        "median_mm": 1.607
+      }
+    },
+    {
+      "name": "Verdichtung an Rillen Leder 1,6 mm <= 50 %",
+      "ok": true,
+      "detail": {
+        "max_verdichtung": "37 %"
       }
     },
     {
       "name": "Spalt Leder 2,0 mm >= 0.85*g",
       "ok": true,
       "detail": {
-        "min_vertikal_mm": 1.959,
-        "median_mm": 2.055,
-        "max_verdichtung_an_rillen": "30 %"
+        "min_vertikal_mm": 1.943,
+        "median_mm": 2.015
+      }
+    },
+    {
+      "name": "Verdichtung an Rillen Leder 2,0 mm <= 50 %",
+      "ok": true,
+      "detail": {
+        "max_verdichtung": "32 %"
       }
     },
     {
@@ -276,24 +297,24 @@
       "name": "Reduktionsfehler Patrize_Positiv_90mm_Leder-1.2mm (p99.9 < 0.03 mm)",
       "ok": true,
       "detail": {
-        "p99_9_mm": 0.0042,
-        "max_mm": 0.0075
+        "p99_9_mm": 0.003,
+        "max_mm": 0.005
       }
     },
     {
       "name": "Reduktionsfehler Patrize_Positiv_90mm_Leder-1.6mm (p99.9 < 0.03 mm)",
       "ok": true,
       "detail": {
-        "p99_9_mm": 0.0039,
-        "max_mm": 0.007
+        "p99_9_mm": 0.003,
+        "max_mm": 0.0049
       }
     },
     {
       "name": "Reduktionsfehler Patrize_Positiv_90mm_Leder-2.0mm (p99.9 < 0.03 mm)",
       "ok": true,
       "detail": {
-        "p99_9_mm": 0.004,
-        "max_mm": 0.0083
+        "p99_9_mm": 0.003,
+        "max_mm": 0.0049
       }
     }
   ]

@@ -1,6 +1,6 @@
 # Projektstatus
 
-## leder-praegung-auto – Prägewerkzeug „Muscle-Car-Patch“ · Version 1.0.0 (2026-11-14)
+## leder-praegung-auto – Prägewerkzeug „Muscle-Car-Patch“ · Version 1.1.0 (2026-11-14)
 
 ### Umgesetzt
 - Relief aus dem Foto abgeleitet: Kontur segmentiert (ohne Schatten, Schlaufe und Lasche),
@@ -12,7 +12,10 @@
   100 × 52 mm. Dazu 4 Passstifte mit Verdrehschutz, Sacklöcher, Anschlagringe und Beschriftung.
 - Export als 3MF (im Repo) und STL (lokal/ZIP), Vorschauen (Vergleich Foto/Relief, 3D-Schrägansicht,
   Draufsichten, Querschnitt in Pressstellung), SVG-Schnittschablone 1:1, `pruefbericht.json`.
-- Automatische Prüfungen: `generate.py` (20 Prüfungen) und `check.py` (Dateien von der Platte neu
+- v1.1: Patrize beruhigt. Statt der unruhigen „Golfball“-Oberfläche aus der reinen Erosion gibt
+  es jetzt begrenzte Muldenfüllung und geglättete Grate, die Fugen sind nur noch in der Matrize.
+  Die Matrize ist unverändert.
+- Automatische Prüfungen: `generate.py` (23 Prüfungen) und `check.py` (Dateien von der Platte neu
   geladen: Geschlossenheit, Maße, STL = 3MF, Stift trifft Loch, Passung der gespiegelten Matrize).
   Stand: alle bestanden.
 
@@ -34,11 +37,12 @@
 - Die Konturen in `generator/shapes.py` gelten nur für dieses Foto.
 
 ## Übergabe
-- **Stand:** v1.0.0 fertig, alle automatischen Prüfungen bestanden. In `main` übernommen
-  (Arbeitszweig `claude/beautiful-mendel-b054dg`). Der Nutzer hat dauerhaft freigegeben, fertige
+- **Stand:** v1.1.0 fertig (Patrize beruhigt), alle automatischen Prüfungen bestanden
+  (23/23 und 35/35). In `main` übernommen (Arbeitszweig `claude/beautiful-mendel-b054dg`). Der Nutzer hat dauerhaft freigegeben, fertige
   und getestete Arbeit direkt nach `main` zu übernehmen.
-- **Für den Nutzer:** Matrize und die passende Patrize drucken (Einstellungen in
-  `leder-praegung-auto/ANLEITUNG.md`), an einem Reststück testen und das Ergebnis zurückmelden.
+- **Für den Nutzer:** Die passende Patrize aus v1.1 drucken, die Matrize ist unverändert
+  (Druckeinstellungen in `leder-praegung-auto/ANLEITUNG.md`). Dann an einem Reststück testen und
+  das Ergebnis zurückmelden.
 - **Für den nächsten Assistenten:** Zuerst `CLAUDE.md` lesen. Druckdateien nur über
   `python3 leder-praegung-auto/generator/generate.py` neu erzeugen und danach
   `python3 leder-praegung-auto/generator/check.py` ausführen. Beide müssen mit Exit-Code 0 enden.

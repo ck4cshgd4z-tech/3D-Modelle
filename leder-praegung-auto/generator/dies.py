@@ -5,9 +5,10 @@ Plattenrand (groesstes y), Spalte 0 = linker Rand. Hoehe z in mm ueber der Druck
 
 Pressen (Stapel von unten nach oben):  Patrize (Gesicht oben) | Leder, Narbenseite oben | Matrize
  - Matrize beruehrt die Sichtseite und traegt das volle Detail:   Pressflaeche = F
- - Patrize beruehrt die Fleischseite: F um die Lederstaerke g nach innen versetzt
-   (Kugel-Erosion = echter Normalenabstand) + halbes Feindetail, begrenzt so, dass der
-   Spalt nirgends unter MIN_GAP_FACTOR * g faellt.
+ - Patrize beruehrt die Fleischseite: Formflaeche (ohne schmale Rillen) per Kugel-Schliessung
+   beruhigt, um die Lederstaerke g nach innen versetzt (Kugel-Erosion = echter Normalenabstand)
+   + halbe erhabene Mitteldetails; Spalt zur Formflaeche nirgends unter min_gap_factor * g.
+ - Schmale Rillen (Fugen, Naht, Schnittkante) formt nur die Matrize durch Verdichtung.
  - Die Matrize wird zum Drucken um die y-Achse gewendet -> im Druckbild spiegelverkehrt.
 """
 from dataclasses import dataclass, field
@@ -26,8 +27,11 @@ class DieParams:
     blank_h: float = 52.0
     patrize_base: float = 4.0      # Plattenstaerke der Patrize unter der Nahtrand-Ebene
     matrize_flange: float = 6.5    # Staerke der Matrize auf Nahtrand-Ebene
-    detail_beta: float = 0.5       # Anteil Feindetail auf der Patrize
-    detail_sigma: float = 0.6      # mm, Trennung grob/fein
+    detail_beta: float = 0.5       # Anteil erhabener Mitteldetails auf der Patrize
+    detail_sigma: float = 0.25     # mm, Bandpass 0,25..1,0 mm fuer diese Details
+    close_factor: float = 0.6      # Schliessradius = Faktor * Lederstaerke (Mulden fuellen)
+    fill_max: float = 0.10         # mm, maximale Auffuellung flacher Mulden
+    smooth_sigma: float = 0.25     # mm, Glaettung der Erosionsgrate
     min_gap_factor: float = 0.85   # minimaler Spalt = Faktor * Lederstaerke
     stop_factor: float = 0.85      # Hoehe der Anschlagringe = Faktor * Lederstaerke
     pin_h: float = 6.5             # Stifthoehe ueber Patrizen-Grundflaeche
@@ -88,12 +92,41 @@ def ball_erode(Z, R, res):
     return out
 
 
-def patrize_relative(F, g, p: DieParams):
-    """Oberflaeche der Patrize relativ zur Nahtrand-Ebene der Lederunterseite."""
-    coarse = ball_erode(F, g, p.res) + g
-    fine = F - cv2.GaussianBlur(F, (0, 0), p.detail_sigma / p.res)
-    limit = ball_erode(F, p.min_gap_factor * g, p.res) + g
-    return np.minimum(coarse + p.detail_beta * fine, limit).astype(np.float32)
+def ball_dilate(Z, R, res):
+    """D(x) = max_{|d|<=R} Z(x+d) + sqrt(R^2-|d|^2) (Gegenstueck zu ball_erode)."""
+    return -ball_erode(-Z, R, res)
+
+
+def _softmin(a, b, k=0.03):
+    """Glattes Minimum ohne Knick, immer <= min(a, b) (Spalt bleibt garantiert)."""
+    m = np.minimum(a, b)
+    return m - k * np.log1p(np.exp(-np.abs(a - b) / k))
+
+
+def patrize_relative(F_form, g, p: DieParams):
+    """Oberflaeche der Patrize relativ zur Nahtrand-Ebene der Lederunterseite.
+
+    Eine reine Kugel-Erosion der Formflaeche macht aus jeder kleinen Mulde eine Kugeldelle und
+    zwischen den Dellen scharfe Grate ("Golfball"-Oberflaeche). Deshalb:
+    1. Flache Mulden begrenzt auffuellen: min(Kugel-Schliessung, F + fill_max). Echte
+       Vertiefungen (Raeder, Scheiben, Einlass) bleiben erhalten, die Mehrverdichtung ist
+       hoechstens fill_max.
+    2. Kugel-Erosion um g: echter Normalenabstand = Lederstaerke.
+    3. Grate glaetten (Gauss): senkt nur die konvexen Grate, der Spalt waechst dadurch.
+    4. Erhabene Mitteldetails (Spiegel, Lamellen, Speichen) zur Haelfte zurueck.
+    5. Glattes Minimum mit dem 0,85*g-Versatz: Mindestspalt garantiert, ohne Knicke.
+    Rueckgabe: (Patrize relativ, aufgefuellte Formflaeche fuer die Spaltpruefung)."""
+    R = p.close_factor * g
+    filled = np.minimum(ball_erode(ball_dilate(F_form, R, p.res), R, p.res), F_form + p.fill_max)
+    filled = np.maximum(filled, F_form)
+    sig = p.smooth_sigma / p.res
+    coarse = cv2.GaussianBlur(ball_erode(filled, g, p.res), (0, 0), sig) + g
+    limit = cv2.GaussianBlur(ball_erode(filled, p.min_gap_factor * g, p.res), (0, 0), sig) + g - 0.03
+    s1, s2 = p.detail_sigma / p.res, 4 * p.detail_sigma / p.res
+    band = cv2.GaussianBlur(F_form, (0, 0), s1) - cv2.GaussianBlur(F_form, (0, 0), s2)
+    detail = p.detail_beta * cv2.GaussianBlur(np.maximum(band, 0), (0, 0), s1)
+    rel = _softmin(coarse + detail, limit)
+    return rel.astype(np.float32), filled.astype(np.float32)
 
 
 def _disk_profile(X, Y, cx, cy, r, h_top, chamfer):
@@ -116,8 +149,8 @@ def _engrave_text(Z, X, Y, text, center_xy, height_mm, depth, p: DieParams):
     return Z - depth * (m > 0)
 
 
-def build_patrize(F, g, X, Y, p: DieParams, label):
-    rel = patrize_relative(F, g, p)
+def build_patrize(F_form, g, X, Y, p: DieParams, label):
+    rel, closed = patrize_relative(F_form, g, p)
     Z = p.patrize_base + rel
     stop_h = p.patrize_base + p.stop_factor * g
     for (cx, cy, d) in p.pins:
@@ -127,7 +160,7 @@ def build_patrize(F, g, X, Y, p: DieParams, label):
         pin = _disk_profile(X, Y, cx, cy, d / 2, p.patrize_base + p.pin_h, p.pin_chamfer)
         Z = np.where(np.isnan(pin), Z, np.maximum(Z, pin))
     Z = _engrave_text(Z, X, Y, label, (0.0, -(p.plate_h / 2 + p.blank_h / 2) / 2), 3.6, p.label_depth, p)
-    return Z.astype(np.float32), rel
+    return Z.astype(np.float32), rel, closed
 
 
 def build_matrize(F, X, Y, p: DieParams, label):

@@ -32,9 +32,13 @@ Dieses Repository wird abwechselnd von mehreren KI-Assistenten bearbeitet (Claud
 - Koordinaten: Plattenmitte = Ursprung, x nach rechts, y nach oben. Array-Zeile 0 = oberer Rand
   (+y). Fotozeilen laufen nach unten, deshalb beim Umrechnen y spiegeln (`relief_to_plate`).
 - Die **Matrize** trägt die Sichtseite F und das volle Detail. Sie wird zum Druck um die y-Achse
-  gewendet und ist dadurch spiegelverkehrt. Die **Patrize** entsteht durch Kugel-Erosion um die
-  Lederstärke plus halbes Feindetail und hat einen Mindestspalt von 0,85 × Lederstärke.
-  Naht-, Trenn- und Schnittkanten-Rillen gibt es **nur** in der Matrize.
+  gewendet und ist dadurch spiegelverkehrt. Die **Patrize** entsteht aus der Formfläche (ohne
+  schmale Rillen): flache Mulden werden begrenzt aufgefüllt, dann folgen Kugel-Erosion um die
+  Lederstärke, Glättung der Erosionsgrate und halbe erhabene Mitteldetails. Der Mindestspalt
+  beträgt 0,85 × Lederstärke. Eine reine Erosion ergibt eine unruhige „Golfball“-Oberfläche
+  (siehe ENTSCHEIDUNGEN Nr. 12).
+  **Alle schmalen Rillen** (Karosseriefugen, Naht-, Trenn- und Schnittkanten-Rille) gibt es nur in
+  der Matrize. Die Verdichtung an diesen Rillen darf höchstens 50 % betragen (wird geprüft).
 - Nachgezeichnete Bildbereiche (`shapes.py`) gelten nur für `quelle/foto.jpg`. Bei einem neuen
   Foto neu zeichnen und mit `generate.py --kontrollbild` kontrollieren.
 - Abnahmekriterium: `generate.py` und `check.py` enden mit Exit-Code 0 (alle Prüfungen OK).

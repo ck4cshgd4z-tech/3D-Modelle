@@ -1,6 +1,6 @@
 # Entscheidungen
 
-## leder-praegung-auto (Stand 1.0.0, 2026-11-14)
+## leder-praegung-auto (Stand 1.1.0, 2026-11-14)
 
 1. **Werkzeugsatz aus Matrize und Patrize statt Einzelstempel.** Auf dem Foto ist das Auto
    *erhaben*. Das gelingt nur, wenn die Narbenseite in ein Negativ (Matrize) gedrückt und von
@@ -8,8 +8,9 @@
    vertieft und spiegelverkehrt einprägen.
 2. **Die Matrize trägt das volle Detail, die Patrize ist um die Lederstärke versetzt.** Feine
    Details formt nur das Werkzeug, das die Sichtseite berührt. Die Patrize entsteht durch
-   Kugel-Erosion (echter Normalenabstand statt reiner Verschiebung nach unten) plus 50 %
-   Feindetail. Der Mindestspalt von 0,85 × Lederstärke ist garantiert und wird geprüft.
+   Kugel-Erosion (echter Normalenabstand statt reiner Verschiebung nach unten), seit v1.1
+   beruhigt (siehe Nr. 12). Der Mindestspalt von 0,85 × Lederstärke ist garantiert und wird
+   geprüft.
 3. **Eine Matrize und drei Patrizen (Leder 1,2 / 1,6 / 2,0 mm).** Nur die Patrize hängt von der
    Lederstärke ab. Anschlagringe in Höhe 0,85 × Lederstärke verhindern Überpressen und sorgen
    für gleichmäßige Ergebnisse.
@@ -23,9 +24,9 @@
 6. **Details auf Druckbarkeit ausgelegt (0,4-mm-Düse).** Fugen werden auf etwa 0,45 mm
    verbreitert. Die sehr feinen Lamellen aus dem Foto (0,4 mm Abstand) sind auf vier bzw. eine
    Lamelle mit etwa 0,7 mm Abstand vereinfacht.
-7. **Naht-, Trenn- und Schnittkanten-Rillen nur in der Matrize.** Sie prägen sich durch
-   Verdichtung (wie beim Punzieren, maximal etwa 34 % bei 1,6-mm-Leder). Die Patrize bleibt im
-   Randbereich eben.
+7. **Alle schmalen Rillen nur in der Matrize** (seit v1.1 auch die Karosseriefugen). Sie prägen
+   sich durch Verdichtung wie beim Punzieren. Geprüft wird höchstens 50 % (aktuell 46 / 37 / 32 %
+   bei 1,2 / 1,6 / 2,0 mm). Die Patrize bleibt im Randbereich eben.
 8. **Ausrichtung über 4 Stifte und Sacklöcher, ein Stift ist dicker (Ø 8 statt Ø 6 mm).** Damit
    kann die Matrize nicht verdreht aufgesetzt werden. Sacklöcher statt Durchgangslöcher, damit
    kein Stift aus der Matrize herausragt.
@@ -36,3 +37,11 @@
     über `--laenge` änderbar.
 11. **STL nicht im Git.** Je Datei etwa 22 MB. Versioniert wird das kompakte 3MF (etwa 6 MB), die
     STL-Dateien kommen über den Generator oder das Übergabe-ZIP.
+12. **Patrize beruhigt (v1.1).** Eine reine Kugel-Erosion der Sichtseite macht aus jeder feinen
+    Mulde eine Kugeldelle mit scharfen Graten dazwischen. Das ergibt eine unruhige
+    „Golfball“-Oberfläche, die bei dünnem Leder durchdrücken kann. Neu: Fugen gehen gar nicht erst
+    in die Patrize ein. Flache Mulden werden höchstens 0,10 mm aufgefüllt, eine stärkere
+    Schließung würde echte Vertiefungen wie das Hinterrad füllen und dort bis 58 % quetschen.
+    Nach der Erosion werden die Grate geglättet (σ 0,25 mm), das senkt nur die Grate, der Spalt
+    wird also nicht kleiner. Das Grat-Maß sinkt dadurch von 16 auf 6 µm. Die Patrize wirkt bewusst
+    weicher als die Matrize, weil die Details nur von der Sichtseite her entstehen.

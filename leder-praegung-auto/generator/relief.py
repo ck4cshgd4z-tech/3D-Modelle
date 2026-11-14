@@ -126,8 +126,10 @@ def _soft(m, s=2.0):
 
 
 def build_relief(g, outer, patch_mm):
-    """Gibt (F_body, grooves, info) zurueck, mm auf dem Fotoraster.
-    Sichtseite F = F_body - grooves (grooves = Naht-, Trenn- und Schnittkanten-Rille)."""
+    """Gibt (F_form, grooves, info) zurueck, mm auf dem Fotoraster.
+    Sichtseite F = F_form - grooves. grooves = alle schmalen Rillen (Karosseriefugen, Naht-,
+    Trenn- und Schnittkanten-Rille): sie entstehen nur durch die Matrize (Verdichtung wie beim
+    Punzieren). F_form = Formflaeche, aus der die Patrize abgeleitet wird."""
     sh = g.shape
     ys, xs = np.where(outer)
     mmpp = patch_mm / float(xs.max() - xs.min())
@@ -198,22 +200,23 @@ def build_relief(g, outer, patch_mm):
     dark = cv2.GaussianBlur(dark, (0, 0), 1.2)
 
     inner = np.clip(d_c / 0.5, 0, 1)
-    F = carf * (pillow + inner * (sfs + sem - LINE_DEPTH * dark))
+    F = carf * (pillow + inner * (sfs + sem))
+    line_grooves = carf * inner * LINE_DEPTH * dark
 
-    # 5) Nahtrand-Rillen (nur Matrize: praegen sich durch Verdichtung wie beim Punzieren)
+    # 5) Nahtrand-Rillen
     d_outside = ndi.distance_transform_edt(1 - car) * mmpp
-    grooves = EDGE_GROOVE * np.exp(-0.5 * (d_outside / 0.3) ** 2) * (1 - carf)
+    grooves = line_grooves + EDGE_GROOVE * np.exp(-0.5 * (d_outside / 0.3) ** 2) * (1 - carf)
     d_out_mm = d_out * mmpp
     grooves += STITCH_DEPTH * np.exp(-0.5 * ((d_out_mm - STITCH_PX * mmpp) / 0.25) ** 2) * (outer > 0)
     signed = d_out_mm - ndi.distance_transform_edt(1 - outer) * mmpp   # >0 innen, <0 aussen
     grooves += CUTLINE_DEPTH * np.exp(-0.5 * (signed / 0.14) ** 2)
-    F_body = F.astype(np.float32)
+    F_form = F.astype(np.float32)
     grooves = grooves.astype(np.float32)
 
     bbox = (int(xs.min()), int(ys.min()), int(xs.max()), int(ys.max()))
     info = dict(mmpp=mmpp, bbox_px=bbox, car_mask=car, stitch_px=STITCH_PX,
                 patch_w_mm=(bbox[2] - bbox[0]) * mmpp, patch_h_mm=(bbox[3] - bbox[1]) * mmpp)
-    return F_body, grooves, info
+    return F_form, grooves, info
 
 
 def hillshade(Z, res, az_xy=(-0.5, -0.85), alt_deg=40):
