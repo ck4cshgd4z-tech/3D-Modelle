@@ -34,9 +34,9 @@
 - Die Konturen in `generator/shapes.py` gelten nur für dieses Foto.
 
 ## Übergabe
-- **Stand:** v1.0.0 fertig, alle automatischen Prüfungen bestanden. Liegt auf dem Arbeitszweig
-  `claude/beautiful-mendel-b054dg`. **Noch nicht in `main`**: Die Übernahme wurde von der
-  Rechteprüfung der Sitzung blockiert und muss freigegeben oder per Merge/PR nachgeholt werden.
+- **Stand:** v1.0.0 fertig, alle automatischen Prüfungen bestanden. In `main` übernommen
+  (Arbeitszweig `claude/beautiful-mendel-b054dg`). Der Nutzer hat dauerhaft freigegeben, fertige
+  und getestete Arbeit direkt nach `main` zu übernehmen.
 - **Für den Nutzer:** Matrize und die passende Patrize drucken (Einstellungen in
   `leder-praegung-auto/ANLEITUNG.md`), an einem Reststück testen und das Ergebnis zurückmelden.
 - **Für den nächsten Assistenten:** Zuerst `CLAUDE.md` lesen. Druckdateien nur über
