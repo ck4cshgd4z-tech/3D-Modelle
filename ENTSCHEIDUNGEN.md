@@ -45,3 +45,27 @@
     Nach der Erosion werden die Grate geglättet (σ 0,25 mm), das senkt nur die Grate, der Spalt
     wird also nicht kleiner. Das Grat-Maß sinkt dadurch von 16 auf 6 µm. Die Patrize wirkt bewusst
     weicher als die Matrize, weil die Details nur von der Sichtseite her entstehen.
+
+## gemeinsam/ (2026-11-15)
+
+1. **Werkzeugbau als gemeinsame Bibliothek statt Kopie je Projekt.** Matrize, Patrize, Netz,
+   Vorschauen und Prüfungen sind für jedes Motiv gleich, ein Projekt liefert nur seine Sichtseite.
+   Den Umbau habe ich per Geometrie-Vergleich abgesichert: Das Auto-Werkzeug ist identisch.
+
+## logo-anhaenger-popko (Stand 1.0.0, 2026-11-15)
+
+1. **Zwei Formen: Gesamtlogo 60 × 30 mm und PKD-Emblem Ø 45 mm.** Das Logo ist etwa 5,6-mal so
+   breit wie hoch, also wird es auf 60 × 30 mm am größten. „PKD“ wäre im Gesamtlogo nur 0,7 mm
+   hoch und damit weder druck- noch prägbar. Es hat deshalb eine eigene, große Form (Wunsch des
+   Nutzers, höchstens 50 mm).
+2. **Logo erhaben durch Kantenabschrägung, nicht durch Formen von hinten.** Striche von 0,4–0,9 mm
+   sind viel schmaler als das Leder dick ist und lassen sich von der Fleischseite aus nicht
+   formen. Die Matrize drückt deshalb den Rand um die Buchstaben ab (0,38 mm, Auslauf 1,0 mm),
+   wie beim Punzieren. Die Patrize ist ein glattes Kissen. Kleine Innenräume (unter 40 mm²) werden
+   ganz eingedrückt, sonst stünde in ihrer Mitte ein Punkt.
+3. **Mindeststrich 0,40 mm.** „DESIGN“ ist von 0,34 auf 0,40 mm verstärkt. Mehr geht nicht, ohne
+   die Lücken im E unter etwa 0,4 mm zu drücken. Die Ringstärke folgt den feinen Buchstaben.
+4. **Abschrägung 0,38 statt 0,40 mm.** Damit liegt die Verdichtung auch bei 1,2-mm-Leder unter
+   50 % (49 %).
+5. **Vorlage als Pfad-SVG.** Die Schrift „abnes“ ist nicht verfügbar. Eine Ersatzschrift hätte das
+   Logo verfälscht, und die Canva-Version ist älter (DESGN, PKD waagerecht).

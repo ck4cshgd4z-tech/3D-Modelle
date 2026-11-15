@@ -11,7 +11,8 @@ Pressen (Stapel von unten nach oben):  Patrize (Gesicht oben) | Leder, Narbensei
  - Schmale Rillen (Fugen, Naht, Schnittkante) formt nur die Matrize durch Verdichtung.
  - Die Matrize wird zum Drucken um die y-Achse gewendet -> im Druckbild spiegelverkehrt.
 """
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
+from typing import Optional
 
 import cv2
 import numpy as np
@@ -32,6 +33,7 @@ class DieParams:
     close_factor: float = 0.6      # Schliessradius = Faktor * Lederstaerke (Mulden fuellen)
     fill_max: float = 0.10         # mm, maximale Auffuellung flacher Mulden
     smooth_sigma: float = 0.25     # mm, Glaettung der Erosionsgrate
+    patrize_res: Optional[float] = None  # groeberes Rechenraster fuer glatte Patrizen (None = res)
     min_gap_factor: float = 0.85   # minimaler Spalt = Faktor * Lederstaerke
     stop_factor: float = 0.85      # Hoehe der Anschlagringe = Faktor * Lederstaerke
     pin_h: float = 6.5             # Stifthoehe ueber Patrizen-Grundflaeche
@@ -116,6 +118,13 @@ def patrize_relative(F_form, g, p: DieParams):
     4. Erhabene Mitteldetails (Spiegel, Lamellen, Speichen) zur Haelfte zurueck.
     5. Glattes Minimum mit dem 0,85*g-Versatz: Mindestspalt garantiert, ohne Knicke.
     Rueckgabe: (Patrize relativ, aufgefuellte Formflaeche fuer die Spaltpruefung)."""
+    if p.patrize_res and p.patrize_res > p.res * 1.01:      # glatte Form: grob rechnen, hochrechnen
+        H, W = F_form.shape
+        f = p.patrize_res / p.res
+        small = cv2.resize(F_form, (int(round(W / f)), int(round(H / f))), interpolation=cv2.INTER_AREA)
+        rel_s, filled_s = patrize_relative(small, g, replace(p, res=p.patrize_res, patrize_res=None))
+        up = lambda a: cv2.resize(a, (W, H), interpolation=cv2.INTER_CUBIC)
+        return up(rel_s).astype(np.float32), np.maximum(up(filled_s), F_form).astype(np.float32)
     R = p.close_factor * g
     filled = np.minimum(ball_erode(ball_dilate(F_form, R, p.res), R, p.res), F_form + p.fill_max)
     filled = np.maximum(filled, F_form)
@@ -142,6 +151,10 @@ def _engrave_text(Z, X, Y, text, center_xy, height_mm, depth, p: DieParams):
     fs = scale_px / 22.0
     th = max(1, int(round(0.55 / p.res)))
     (tw, tht), _ = cv2.getTextSize(text, font, fs, th)
+    avail = 2 * (min(abs(px) for px, _, _ in p.pins) - p.collar_r - 1.0) / p.res   # zwischen den Stiften
+    if tw > avail:                                    # Beschriftung automatisch verkleinern
+        fs *= avail / tw
+        (tw, tht), _ = cv2.getTextSize(text, font, fs, th)
     m = np.zeros(Z.shape, np.uint8)
     col = int(round((center_xy[0] + p.plate_w / 2) / p.res - tw / 2))
     row = int(round((p.plate_h / 2 - center_xy[1]) / p.res + tht / 2))

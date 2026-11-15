@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="68.0mm" height="38.0mm" viewBox="0 0 68.0 38.0">
+  <title>Schnittschablone Popko logo 1:1 (Zuschnitt 68 x 38 mm)</title>
+  <rect x="0" y="0" width="68.0" height="38.0" fill="none" stroke="#999" stroke-width="0.2"/>
+  <rect x="4.000" y="4.000" width="60.000" height="30.000" rx="6.000" fill="none" stroke="#000" stroke-width="0.25"/>
+  <rect x="6.500" y="6.500" width="55.000" height="25.000" rx="3.500" fill="none" stroke="#c00" stroke-width="0.2" stroke-dasharray="1.6,1.0"/>
+</svg>

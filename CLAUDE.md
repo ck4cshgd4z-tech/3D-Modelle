@@ -20,15 +20,20 @@ Dieses Repository wird abwechselnd von mehreren KI-Assistenten bearbeitet (Claud
 - Jedes Modell bekommt einen eigenen Ordner, z. B. `leder-praegung-auto/`, mit:
   `quelle/` (Vorlagen), `generator/` (reproduzierbare Skripte), `ausgabe/` (Druckdateien und
   Vorschauen) und `ANLEITUNG.md`.
+- `gemeinsam/` enthält den projektübergreifenden Werkzeugbau: `dies.py`, `mesh.py`,
+  `werkzeugsatz.py` (Ablauf, Vorschauen, Prüfungen) und `pruefe_ausgabe.py`. Projekte liefern
+  nur ihre Sichtseite (`F_form`, `grooves`, `outer`). Keine Kopien dieses Codes in Projekte!
+  Wer `gemeinsam/` ändert, erzeugt **alle** Projekte neu und prüft sie (Geometrie-Vergleich mit
+  dem letzten Stand).
 - Druckdateien werden **nur über den Generator** erzeugt, nie von Hand bearbeitet. Zuerst
   Parameter oder Code ändern, dann neu erzeugen.
 - `*.stl` wird nicht versioniert (Größe). Versioniert werden `.3mf`, Vorschauen und Prüfbericht.
   STL-Dateien entstehen lokal über den Generator oder werden als ZIP übergeben.
 
 ## Projekt `leder-praegung-auto` (Prägewerkzeug Leder)
-- Pipeline: `relief.py` (Foto → Höhenkarte der Leder-Sichtseite F) → `dies.py` (Matrize und
-  Patrizen als Höhenfelder in mm) → `mesh.py` (wasserdichtes Netz, Reduktion, STL/3MF) →
-  `generate.py` (Ablauf, Vorschauen, Prüfungen) → `check.py` (unabhängige Dateiprüfung).
+- Pipeline: `relief.py` (Foto → Höhenkarte der Leder-Sichtseite F) → `gemeinsam/` (Matrize,
+  Patrizen, Netz, Vorschauen, Prüfungen) über `generate.py`, danach `check.py` (unabhängige
+  Dateiprüfung).
 - Koordinaten: Plattenmitte = Ursprung, x nach rechts, y nach oben. Array-Zeile 0 = oberer Rand
   (+y). Fotozeilen laufen nach unten, deshalb beim Umrechnen y spiegeln (`relief_to_plate`).
 - Die **Matrize** trägt die Sichtseite F und das volle Detail. Sie wird zum Druck um die y-Achse
@@ -42,3 +47,11 @@ Dieses Repository wird abwechselnd von mehreren KI-Assistenten bearbeitet (Claud
 - Nachgezeichnete Bildbereiche (`shapes.py`) gelten nur für `quelle/foto.jpg`. Bei einem neuen
   Foto neu zeichnen und mit `generate.py --kontrollbild` kontrollieren.
 - Abnahmekriterium: `generate.py` und `check.py` enden mit Exit-Code 0 (alle Prüfungen OK).
+
+## Projekt `logo-anhaenger-popko` (Logo-Prägung)
+- Vorlage ist die Pfad-SVG (`quelle/popko_design_logo_pfade.svg`). Die Schrift „abnes“ ist nicht
+  installiert, deshalb nie die Text-SVG verwenden.
+- Zwei Formen in `generator/generate.py` (`VARIANTEN`): `logo` (60 × 30 mm, ohne PKD-Buchstaben,
+  weil sie zu klein wären) und `emblem` (PKD im Kreis, Ø 45 mm, höchstens 50 mm laut Nutzer).
+- Logo erhaben durch Kantenabschrägung in der Matrize (`grooves`). Die Patrize ist ein glattes
+  Kissen. Mindeststrich 0,40 mm (0,4-mm-Düse), Verdichtung höchstens 50 % (wird geprüft).

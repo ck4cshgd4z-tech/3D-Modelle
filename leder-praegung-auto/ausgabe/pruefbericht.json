@@ -28,6 +28,7 @@
     "close_factor": 0.6,
     "fill_max": 0.1,
     "smooth_sigma": 0.25,
+    "patrize_res": null,
     "min_gap_factor": 0.85,
     "stop_factor": 0.85,
     "pin_h": 6.5,

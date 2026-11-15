@@ -97,7 +97,7 @@ python3 generator/check.py                            # Ausgabedateien unabhäng
 ```
 
 Weitere Parameter (Plattenstärke, Spaltfaktor, Anschlaghöhe, Stifte) stehen in
-`generator/dies.py` in der Klasse `DieParams`, die Reliefgestaltung in `generator/relief.py`.
+`gemeinsam/dies.py` in der Klasse `DieParams`, die Reliefgestaltung in `generator/relief.py`.
 
 ## Hinweis zu Rechten
 

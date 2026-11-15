@@ -7,3 +7,4 @@ rtree>=1.2                            # Abweichungs- und Raycast-Pruefungen
 matplotlib>=3.8
 lxml>=5.0
 networkx>=3.0
+svgelements>=1.9                      # Logo-SVG einlesen

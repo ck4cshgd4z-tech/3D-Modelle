@@ -1,5 +1,12 @@
 # Projektstatus
 
+## gemeinsam/ – Werkzeugbau-Bibliothek (seit 2026-11-15)
+- `dies.py` (Matrize/Patrize als Höhenfelder, Stifte, Sacklöcher, Anschläge, Beschriftung),
+  `mesh.py` (wasserdichtes Netz, Reduktion, STL/3MF), `werkzeugsatz.py` (Gesamtablauf,
+  Vorschauen, Prüfungen, Prüfbericht) und `pruefe_ausgabe.py` (unabhängige Dateiprüfung).
+- Beide Projekte nutzen sie. Nach dem Umbau ist das Auto-Werkzeug geometrisch identisch zu v1.1
+  (Raycast-Vergleich 0,0000 mm, gleiche Volumina, 23/23 und 35/35 Prüfungen).
+
 ## leder-praegung-auto – Prägewerkzeug „Muscle-Car-Patch“ · Version 1.1.0 (2026-11-14)
 
 ### Umgesetzt
@@ -10,41 +17,48 @@
 - Werkzeugsatz für die Bambu Lab P2S: 1 Matrize (Negativ, spiegelverkehrt) und 3 Patrizen
   (Positiv) für Leder 1,2 / 1,6 / 2,0 mm. Platten 126 × 78 mm, Patch 90 × 41 mm, Zuschnitt
   100 × 52 mm. Dazu 4 Passstifte mit Verdrehschutz, Sacklöcher, Anschlagringe und Beschriftung.
-- Export als 3MF (im Repo) und STL (lokal/ZIP), Vorschauen (Vergleich Foto/Relief, 3D-Schrägansicht,
-  Draufsichten, Querschnitt in Pressstellung), SVG-Schnittschablone 1:1, `pruefbericht.json`.
-- v1.1: Patrize beruhigt. Statt der unruhigen „Golfball“-Oberfläche aus der reinen Erosion gibt
-  es jetzt begrenzte Muldenfüllung und geglättete Grate, die Fugen sind nur noch in der Matrize.
-  Die Matrize ist unverändert.
-- Automatische Prüfungen: `generate.py` (23 Prüfungen) und `check.py` (Dateien von der Platte neu
-  geladen: Geschlossenheit, Maße, STL = 3MF, Stift trifft Loch, Passung der gespiegelten Matrize).
-  Stand: alle bestanden.
+- v1.1: Patrize beruhigt, die Unruhe aus der reinen Erosion („Golfball“) ist weg.
+- Prüfungen: `generate.py` 23/23 und `check.py` 35/35 bestanden.
 
 ### Offen / nur in der Zielumgebung prüfbar
-- Probedruck auf der P2S und Prägetest mit echtem Leder (Passung der Stifte, Prägetiefe,
-  Detailschärfe) – kann nur der Nutzer durchführen.
-- Je nach Testergebnis feinjustieren: `stop_factor`, `min_gap_factor`, `hole_clear`,
-  Reliefhöhe (`PILLOW_STEP`, `SFS_GAIN`).
-
-### Vorschläge (nicht umgesetzt)
-- Variante für die 0,2-mm-Düse mit schmaleren Fugen und mehr Lamellen.
-- Werkzeug für Rückenteil und Schlüssellasche wie auf dem Foto.
-- Weitere Größen, z. B. 110 mm (Generator: `--laenge 110`).
+- Probedruck auf der P2S und Prägetest mit echtem Leder – kann nur der Nutzer durchführen.
 
 ### Bekannte Einschränkungen
-- Die Plastik ist aus einem einzigen Foto rekonstruiert. Das kommt dem Original sehr nahe, ist
-  aber kein Messwert: Die Fugen um die Scheibenwischer sind leicht unruhig, das ferne Hinterrad ist
-  weniger scharf als das Vorderrad.
-- Die Konturen in `generator/shapes.py` gelten nur für dieses Foto.
+- Die Plastik ist aus einem einzigen Foto rekonstruiert und kein Messwert. Die Fugen um die
+  Scheibenwischer sind leicht unruhig, das ferne Hinterrad ist weniger scharf als das Vorderrad.
+
+## logo-anhaenger-popko – Popko-Design Logo · Version 1.0.0 (2026-11-15)
+
+### Umgesetzt
+- Vorlage: Pfad-SVG des Nutzers (Schrift „abnes“ in Pfade umgewandelt).
+- **Gesamtlogo:** Anhänger 60 × 30 mm, Logo 48,5 × 8,8 mm (Ring, POPKO, DESIGN). DESIGN von
+  0,34 auf 0,40 mm verstärkt, PKD im kleinen Ring weggelassen (wäre 0,7 mm hoch).
+- **PKD-Emblem:** runder Anhänger Ø 45 mm (Vorgabe des Nutzers: höchstens 50 mm), Ring Ø 33 mm,
+  P/K/D 5,4 mm hoch.
+- Machart: Nahtrand, gepolstertes Feld, Logo erhaben durch Kantenabschrägung (0,38 mm).
+  Patrize = glattes Kissen. Je Form 1 Matrize und 3 Patrizen (1,2 / 1,6 / 2,0 mm).
+- Prüfungen: `generate.py` 28/28 (Logo) und 26/26 (Emblem), dazu Lesrichtung und
+  Mindeststrich; `check.py` 35/35 je Form.
+
+### Offen / nur in der Zielumgebung prüfbar
+- Probedruck und Prägetest, besonders wie gut „DESIGN“ mit 0,4- und mit 0,2-mm-Düse wird.
+
+### Vorschläge (nicht umgesetzt)
+- Rückenteil und Lasche als Schablone; Goldakzente per Heißfolie.
+- Gesamtlogo auf zwei Zeilen umgestellt, wenn ein höherer Anhänger gewünscht ist.
 
 ## Übergabe
-- **Stand:** v1.1.0 fertig (Patrize beruhigt), alle automatischen Prüfungen bestanden
-  (23/23 und 35/35). In `main` übernommen (Arbeitszweig `claude/beautiful-mendel-b054dg`). Der Nutzer hat dauerhaft freigegeben, fertige
+- **Stand:** Neues Projekt `logo-anhaenger-popko` v1.0.0 mit zwei Formen. Werkzeugbau in
+  `gemeinsam/` zusammengeführt. Alle automatischen Prüfungen bestanden, in `main` übernommen
+  (Arbeitszweig `claude/beautiful-mendel-b054dg`). Der Nutzer hat dauerhaft freigegeben, fertige
   und getestete Arbeit direkt nach `main` zu übernehmen.
-- **Für den Nutzer:** Die passende Patrize aus v1.1 drucken, die Matrize ist unverändert
-  (Druckeinstellungen in `leder-praegung-auto/ANLEITUNG.md`). Dann an einem Reststück testen und
-  das Ergebnis zurückmelden.
-- **Für den nächsten Assistenten:** Zuerst `CLAUDE.md` lesen. Druckdateien nur über
-  `python3 leder-praegung-auto/generator/generate.py` neu erzeugen und danach
-  `python3 leder-praegung-auto/generator/check.py` ausführen. Beide müssen mit Exit-Code 0 enden.
-  STL wird nicht versioniert. Ein voller Lauf dauert etwa 2 Minuten, `--schnell` etwa 30 Sekunden.
-- **Umgebung:** Python 3.13, Pakete in `requirements.txt` (OpenCV mit contrib-Modulen nötig).
+- **Für den Nutzer:** Matrize und passende Patrize der gewünschten Form drucken
+  (`logo-anhaenger-popko/ANLEITUNG.md`), am Reststück testen, Ergebnis zurückmelden.
+- **Für den nächsten Assistenten:** Zuerst `CLAUDE.md` lesen. Druckdateien nur über die
+  Generatoren erzeugen, danach das jeweilige `generator/check.py` ausführen. Beides muss mit
+  Exit-Code 0 enden. Änderungen an `gemeinsam/` betreffen **beide** Projekte, also beide neu
+  erzeugen und prüfen. Eine reine Neuerzeugung ändert die 3MF-Bytes (zufällige IDs), ohne dass
+  sich die Geometrie ändert. Solche Dateien nicht unnötig committen.
+  Laufzeit: Auto etwa 2 Minuten, Logo beide Formen etwa 5 Minuten, `--schnell` deutlich kürzer.
+- **Umgebung:** Python 3.13, Pakete in `requirements.txt` (OpenCV mit contrib-Modulen,
+  svgelements).

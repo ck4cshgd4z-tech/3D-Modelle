@@ -1,0 +1,369 @@
+{
+  "version": "1.0.0",
+  "variante": "emblem",
+  "anhaenger_mm": [
+    45.0,
+    45.0
+  ],
+  "form": "kreis",
+  "leder_mm": [
+    1.2,
+    1.6,
+    2.0
+  ],
+  "logo": {
+    "scale": 1.6159442911278241,
+    "pkd": {
+      "strich_original_mm": 0.849,
+      "strich_mm": 0.849,
+      "verstaerkt_mm": 0.0,
+      "buchstabenhoehe_mm": 5.41
+    },
+    "ring": {
+      "durchmesser_aussen_mm": 33.0,
+      "strich_mm": 0.85
+    },
+    "logo_mm": [
+      33.0,
+      33.0
+    ]
+  },
+  "relief_mm": [
+    -0.3,
+    1.048
+  ],
+  "parameter": {
+    "res": 0.05,
+    "plate_w": 79.0,
+    "plate_h": 79.0,
+    "corner_r": 4.0,
+    "blank_w": 53.0,
+    "blank_h": 53.0,
+    "patrize_base": 4.0,
+    "matrize_flange": 6.5,
+    "detail_beta": 0.5,
+    "detail_sigma": 0.25,
+    "close_factor": 0.6,
+    "fill_max": 0.1,
+    "smooth_sigma": 0.25,
+    "patrize_res": 0.1,
+    "min_gap_factor": 0.85,
+    "stop_factor": 0.85,
+    "pin_h": 6.5,
+    "pin_chamfer": 0.8,
+    "hole_clear": 0.25,
+    "hole_depth": 6.0,
+    "hole_chamfer": 0.6,
+    "collar_r": 5.5,
+    "label_depth": 0.4,
+    "pins": [
+      [
+        -33.5,
+        33.5,
+        8.0
+      ],
+      [
+        33.5,
+        33.5,
+        6.0
+      ],
+      [
+        33.5,
+        -33.5,
+        6.0
+      ],
+      [
+        -33.5,
+        -33.5,
+        6.0
+      ]
+    ]
+  },
+  "dateien": [
+    "Popko-PKD-Emblem_Matrize_Negativ_D45mm.stl",
+    "Popko-PKD-Emblem_Matrize_Negativ_D45mm.3mf",
+    "Popko-PKD-Emblem_Patrize_Positiv_D45mm_Leder-1.2mm.stl",
+    "Popko-PKD-Emblem_Patrize_Positiv_D45mm_Leder-1.2mm.3mf",
+    "Popko-PKD-Emblem_Patrize_Positiv_D45mm_Leder-1.6mm.stl",
+    "Popko-PKD-Emblem_Patrize_Positiv_D45mm_Leder-1.6mm.3mf",
+    "Popko-PKD-Emblem_Patrize_Positiv_D45mm_Leder-2.0mm.stl",
+    "Popko-PKD-Emblem_Patrize_Positiv_D45mm_Leder-2.0mm.3mf"
+  ],
+  "pruefungen": [
+    {
+      "name": "Netz Popko-PKD-Emblem_Matrize_Negativ_D45mm: wasserdicht/mannigfaltig",
+      "ok": true,
+      "detail": {
+        "faces": 450000,
+        "watertight": true,
+        "winding_consistent": true,
+        "volume_ok": true,
+        "volume_cm3": 38.57,
+        "bounds": [
+          [
+            -39.5,
+            -39.5,
+            0.0
+          ],
+          [
+            39.5,
+            39.5,
+            6.803
+          ]
+        ]
+      }
+    },
+    {
+      "name": "Netz Popko-PKD-Emblem_Patrize_Positiv_D45mm_Leder-1.2mm: wasserdicht/mannigfaltig",
+      "ok": true,
+      "detail": {
+        "faces": 450000,
+        "watertight": true,
+        "winding_consistent": true,
+        "volume_ok": true,
+        "volume_cm3": 26.96,
+        "bounds": [
+          [
+            -39.5,
+            -39.5,
+            0.0
+          ],
+          [
+            39.5,
+            39.5,
+            10.5
+          ]
+        ]
+      }
+    },
+    {
+      "name": "Netz Popko-PKD-Emblem_Patrize_Positiv_D45mm_Leder-1.6mm: wasserdicht/mannigfaltig",
+      "ok": true,
+      "detail": {
+        "faces": 450000,
+        "watertight": true,
+        "winding_consistent": true,
+        "volume_ok": true,
+        "volume_cm3": 27.04,
+        "bounds": [
+          [
+            -39.5,
+            -39.5,
+            0.0
+          ],
+          [
+            39.5,
+            39.5,
+            10.5
+          ]
+        ]
+      }
+    },
+    {
+      "name": "Netz Popko-PKD-Emblem_Patrize_Positiv_D45mm_Leder-2.0mm: wasserdicht/mannigfaltig",
+      "ok": true,
+      "detail": {
+        "faces": 449998,
+        "watertight": true,
+        "winding_consistent": true,
+        "volume_ok": true,
+        "volume_cm3": 27.11,
+        "bounds": [
+          [
+            -39.5,
+            -39.5,
+            0.0
+          ],
+          [
+            39.5,
+            39.5,
+            10.5
+          ]
+        ]
+      }
+    },
+    {
+      "name": "Spalt Leder 1,2 mm >= 0.85*g",
+      "ok": true,
+      "detail": {
+        "min_vertikal_mm": 1.163,
+        "median_mm": 1.2
+      }
+    },
+    {
+      "name": "Verdichtung an Rillen Leder 1,2 mm <= 50 %",
+      "ok": true,
+      "detail": {
+        "max_verdichtung": "48 %"
+      }
+    },
+    {
+      "name": "Spalt Leder 1,6 mm >= 0.85*g",
+      "ok": true,
+      "detail": {
+        "min_vertikal_mm": 1.568,
+        "median_mm": 1.6
+      }
+    },
+    {
+      "name": "Verdichtung an Rillen Leder 1,6 mm <= 50 %",
+      "ok": true,
+      "detail": {
+        "max_verdichtung": "40 %"
+      }
+    },
+    {
+      "name": "Spalt Leder 2,0 mm >= 0.85*g",
+      "ok": true,
+      "detail": {
+        "min_vertikal_mm": 1.974,
+        "median_mm": 2.0
+      }
+    },
+    {
+      "name": "Verdichtung an Rillen Leder 2,0 mm <= 50 %",
+      "ok": true,
+      "detail": {
+        "max_verdichtung": "34 %"
+      }
+    },
+    {
+      "name": "Stift (-34,+34) Ø8: Bohrung vorhanden, ausserhalb Zuschnitt",
+      "ok": true,
+      "detail": {
+        "bohrung": true,
+        "frei": true
+      }
+    },
+    {
+      "name": "Stift (+34,+34) Ø6: Bohrung vorhanden, ausserhalb Zuschnitt",
+      "ok": true,
+      "detail": {
+        "bohrung": true,
+        "frei": true
+      }
+    },
+    {
+      "name": "Stift (+34,-34) Ø6: Bohrung vorhanden, ausserhalb Zuschnitt",
+      "ok": true,
+      "detail": {
+        "bohrung": true,
+        "frei": true
+      }
+    },
+    {
+      "name": "Stift (-34,-34) Ø6: Bohrung vorhanden, ausserhalb Zuschnitt",
+      "ok": true,
+      "detail": {
+        "bohrung": true,
+        "frei": true
+      }
+    },
+    {
+      "name": "Stifteintauchtiefe Leder 1,2 mm < Sacklochtiefe",
+      "ok": true,
+      "detail": {
+        "eintauchen_mm": 5.48,
+        "sackloch_mm": 6.0
+      }
+    },
+    {
+      "name": "Stifteintauchtiefe Leder 1,6 mm < Sacklochtiefe",
+      "ok": true,
+      "detail": {
+        "eintauchen_mm": 5.14,
+        "sackloch_mm": 6.0
+      }
+    },
+    {
+      "name": "Stifteintauchtiefe Leder 2,0 mm < Sacklochtiefe",
+      "ok": true,
+      "detail": {
+        "eintauchen_mm": 4.8,
+        "sackloch_mm": 6.0
+      }
+    },
+    {
+      "name": "Patch passt in Lederzuschnitt",
+      "ok": true,
+      "detail": {
+        "patch_mm": [
+          45.0,
+          45.0
+        ],
+        "zuschnitt_mm": [
+          53.0,
+          53.0
+        ]
+      }
+    },
+    {
+      "name": "Matrize Mindest-Bodenstaerke >= 3 mm",
+      "ok": true,
+      "detail": {
+        "boden_mm": 5.45
+      }
+    },
+    {
+      "name": "Reduktionsfehler Popko-PKD-Emblem_Matrize_Negativ_D45mm (p99.9 < 0.03 mm)",
+      "ok": true,
+      "detail": {
+        "p99_9_mm": 0.0041,
+        "max_mm": 0.0118
+      }
+    },
+    {
+      "name": "Reduktionsfehler Popko-PKD-Emblem_Patrize_Positiv_D45mm_Leder-1.2mm (p99.9 < 0.03 mm)",
+      "ok": true,
+      "detail": {
+        "p99_9_mm": 0.0028,
+        "max_mm": 0.01
+      }
+    },
+    {
+      "name": "Reduktionsfehler Popko-PKD-Emblem_Patrize_Positiv_D45mm_Leder-1.6mm (p99.9 < 0.03 mm)",
+      "ok": true,
+      "detail": {
+        "p99_9_mm": 0.0026,
+        "max_mm": 0.006
+      }
+    },
+    {
+      "name": "Reduktionsfehler Popko-PKD-Emblem_Patrize_Positiv_D45mm_Leder-2.0mm (p99.9 < 0.03 mm)",
+      "ok": true,
+      "detail": {
+        "p99_9_mm": 0.0026,
+        "max_mm": 0.0066
+      }
+    },
+    {
+      "name": "Mindeststrich pkd >= 0,40 mm (Duese 0,4)",
+      "ok": true,
+      "detail": {
+        "strich_original_mm": 0.849,
+        "strich_mm": 0.849,
+        "verstaerkt_mm": 0.0,
+        "buchstabenhoehe_mm": 5.41
+      }
+    },
+    {
+      "name": "Mindeststrich ring >= 0,40 mm (Duese 0,4)",
+      "ok": true,
+      "detail": {
+        "durchmesser_aussen_mm": 33.0,
+        "strich_mm": 0.85
+      }
+    },
+    {
+      "name": "Logo liegt im Kissenfeld (mit Auslauf der Abschraegung)",
+      "ok": true,
+      "detail": {
+        "logo_mm": [
+          33.0,
+          33.0
+        ],
+        "feld_mm": 37.0
+      }
+    }
+  ]
+}

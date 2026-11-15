@@ -217,14 +217,3 @@ def build_relief(g, outer, patch_mm):
     info = dict(mmpp=mmpp, bbox_px=bbox, car_mask=car, stitch_px=STITCH_PX,
                 patch_w_mm=(bbox[2] - bbox[0]) * mmpp, patch_h_mm=(bbox[3] - bbox[1]) * mmpp)
     return F_form, grooves, info
-
-
-def hillshade(Z, res, az_xy=(-0.5, -0.85), alt_deg=40):
-    """Schattierte Ansicht einer Hoehenkarte (Zeilen = von oben nach unten)."""
-    gy, gx = np.gradient(Z, res)
-    alt = np.radians(alt_deg)
-    lx, ly, lz = np.cos(alt) * az_xy[0], np.cos(alt) * az_xy[1], np.sin(alt)
-    n = np.dstack([-gx, -gy, np.ones_like(Z)])
-    n /= np.linalg.norm(n, axis=2, keepdims=True)
-    s = np.clip(n[..., 0] * lx + n[..., 1] * ly + n[..., 2] * lz, 0, 1)
-    return (s ** 1.2 * 235 + 10).astype(np.uint8)

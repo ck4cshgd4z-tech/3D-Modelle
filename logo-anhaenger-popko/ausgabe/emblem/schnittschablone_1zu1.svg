@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="53.0mm" height="53.0mm" viewBox="0 0 53.0 53.0">
+  <title>Schnittschablone Popko emblem 1:1 (Zuschnitt 53 x 53 mm)</title>
+  <rect x="0" y="0" width="53.0" height="53.0" fill="none" stroke="#999" stroke-width="0.2"/>
+  <circle cx="26.5" cy="26.5" r="22.500" fill="none" stroke="#000" stroke-width="0.25"/>
+  <circle cx="26.5" cy="26.5" r="20.000" fill="none" stroke="#c00" stroke-width="0.2" stroke-dasharray="1.6,1.0"/>
+</svg>
